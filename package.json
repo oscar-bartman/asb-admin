@@ -1,0 +1,23 @@
+{
+  "name": "asb-admin",
+  "version": "1.0.0",
+  "description": "admin tool for azure service bus",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/oscar-bartman/asb-admin.git"
+  },
+  "keywords": [
+    "asb",
+    "admin"
+  ],
+  "author": "me@obartman.nl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oscar-bartman/asb-admin/issues"
+  },
+  "homepage": "https://github.com/oscar-bartman/asb-admin#readme"
+}
