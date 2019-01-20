@@ -2,9 +2,10 @@
   "name": "asb-admin",
   "version": "1.0.0",
   "description": "admin tool for azure service bus",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "test"
+    "start": "node ./bin/asb-admin.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,22 @@
   "bugs": {
     "url": "https://github.com/oscar-bartman/asb-admin/issues"
   },
-  "homepage": "https://github.com/oscar-bartman/asb-admin#readme"
+  "homepage": "https://github.com/oscar-bartman/asb-admin#readme",
+  "dependencies": {
+    "@types/azure-sb": "0.0.33",
+    "@types/table": "^4.0.5",
+    "azure": "^2.3.1-preview",
+    "commander": "^2.19.0",
+    "dotenv": "^6.2.0",
+    "table": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.0",
+    "azure-sb": "^0.10.6",
+    "@types/node": "^10.12.18",
+    "typescript": "^3.2.4"
+  },
+  "bin": {
+    "asb-admin": "./bin/asb-admin.js"
+  }
 }
