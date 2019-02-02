@@ -1,7 +1,7 @@
 import * as program from "commander"
 import * as azure from "azure-sb";
-import {Azure, ServiceBusService} from "azure-sb";
-import {table} from "table"
+import { Azure, ServiceBusService } from "azure-sb";
+import { table } from "table"
 import Topic = Azure.ServiceBus.Results.Models.Topic;
 import Subscription = Azure.ServiceBus.Results.Models.Subscription;
 import * as fp from "lodash/fp";
