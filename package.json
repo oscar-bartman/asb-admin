@@ -12,8 +12,7 @@
     "url": "git+ssh://git@github.com/oscar-bartman/asb-admin.git"
   },
   "keywords": [
-    "asb",
-    "admin"
+    "asb"
   ],
   "author": "me@obartman.nl",
   "license": "ISC",
@@ -22,13 +21,16 @@
   },
   "homepage": "https://github.com/oscar-bartman/asb-admin#readme",
   "dependencies": {
+    "@grandvision/event-processor": "file:../grandvision/event-processor",
     "@types/azure-sb": "0.0.33",
     "@types/table": "^4.0.5",
+    "@types/winston": "^2.4.4",
     "azure": "^2.3.1-preview",
     "commander": "^2.19.0",
     "dotenv": "^6.2.0",
     "lodash": "^4.17.11",
-    "table": "^5.2.1"
+    "table": "^5.2.1",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.0",

@@ -9,12 +9,12 @@ with the name `AZURE_SERVICEBUS_CONNECTION_STRING`.
 
 ```bash
 # list subscriptions for [topic]
-$ asb-admin list subs [topic]
+$ asb-admin list [topic]
 
 # list all subscriptions for all topics
-$ asb-admin list subs
+$ asb-admin list
 ```
 
 ## Contribute
 - npm run build
-- npm start
+- npm start (args)

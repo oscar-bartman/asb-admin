@@ -7,12 +7,12 @@ import Subscription = Azure.ServiceBus.Results.Models.Subscription;
 import * as fp from "lodash/fp";
 import {promisify} from "util";
 
-const serviceBusService: ServiceBusService = azure.createServiceBusService();
-const listTopicsAsync: any = promisify(serviceBusService.listTopics).bind(serviceBusService);
-const listSubscriptionsAsync: any = promisify(serviceBusService.listSubscriptions).bind(serviceBusService);
+const _serviceBusService: ServiceBusService = azure.createServiceBusService();
+const _listTopicsAsync: any = promisify(_serviceBusService.listTopics).bind(_serviceBusService);
+const _listSubscriptionsAsync: any = promisify(_serviceBusService.listSubscriptions).bind(_serviceBusService);
 
-const toCommaSeparated = fp.reduce((acc: string, sub: Subscription) => `${sub.SubscriptionName}${acc? `, ${acc}`: ""}`, "");
-const drawOptions = {
+const _toCommaSeparated = fp.reduce((acc: string, sub: Subscription) => `${sub.SubscriptionName}${acc ? `, ${acc}` : ""}`, "");
+const _drawOptions = {
     drawHorizontalLine: (index: number, size: number) => {
         return index === 0 || index === 1 || index === size;
     }
@@ -21,17 +21,10 @@ const drawOptions = {
 program
     .parse(process.argv);
 
-if (!program.args[0]) {
-    console.log("argument [elem] required");
-    process.exit(1);
-}
-
-const elem = program.args[0];
-
 const listSubsAllTopics = async () => {
     let topics: Topic[];
     try {
-        topics = await listTopicsAsync();
+        topics = await _listTopicsAsync();
     } catch (e) {
         throw e;
     }
@@ -43,14 +36,14 @@ const listSubsAllTopics = async () => {
 
     const subLists = await Promise.all(topicNames.map((topicName: string) => {
         try {
-            return listSubscriptionsAsync(topicName);
+            return _listSubscriptionsAsync(topicName);
         } catch (e) {
             throw e;
         }
     }));
 
     const subNamesStrings: string[] = fp.flatMap((subList: Subscription[]) => {
-        return toCommaSeparated(subList);
+        return _toCommaSeparated(subList);
     })(subLists);
 
     let data = topicNames.map((name: string, index: number) => [name, subNamesStrings[index]]);
@@ -60,37 +53,36 @@ const listSubsAllTopics = async () => {
         ...data
     ];
 
-    console.log(table(data, drawOptions));
+    console.log(table(data, _drawOptions));
 };
 
 const listSubsTopic = async (topic: string) => {
     let subList;
     try {
-        subList = await listSubscriptionsAsync(topic);
+        subList = await _listSubscriptionsAsync(topic);
     } catch (e) {
         throw e;
     }
 
     const data = [
         ["Topic", "Subscriptions"],
-        [topic, toCommaSeparated(subList)]
+        [topic, _toCommaSeparated(subList)]
     ];
 
-    console.log(table(data, drawOptions));
+    console.log(table(data, _drawOptions));
 };
 
-if (elem === "s" || elem === "subs" || elem === "subscriptions") {
-    if (!program.args[1]) {
-        listSubsAllTopics()
-            .catch(e => {
-                console.log(e);
-            });
-    } else {
-        const topic = program.args[1];
-        listSubsTopic(topic)
-            .catch(e => {
-                console.log(e);
-            });
-    }
+
+if (!program.args[0]) {
+    listSubsAllTopics()
+        .catch(e => {
+            console.log(e);
+        });
+} else {
+    const topic = program.args[0];
+    listSubsTopic(topic)
+        .catch(e => {
+            console.log(e);
+        });
 }
 

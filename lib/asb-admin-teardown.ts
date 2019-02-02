@@ -1,6 +1,6 @@
-import * as program from "commander";
-import { setupServiceBus } from "./builder/setup";
+import * as program from "commander"
 import * as fs from "fs";
+import { tearDownServiceBus } from "./builder/teardown";
 
 program
     .parse(process.argv);
@@ -14,12 +14,10 @@ if (!program.args[0]) {
 file = fs.readFileSync(file, "utf8");
 const config: object[] = JSON.parse(file);
 
-setupServiceBus(config).then(() => {
-    console.log("Successfully built service bus configuration");
+tearDownServiceBus(config).then(() => {
+    console.log("Successfully tore down service bus configuration.")
 }).catch(e => {
-    if (e.statusCode === 409) {
+    if (e.statusCode === 404) {
         console.log(e.detail);
-    } else {
-        console.log(e);
     }
 });
