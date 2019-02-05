@@ -1,11 +1,12 @@
 import * as program from "commander"
 import * as azure from "azure-sb";
 import { Azure, ServiceBusService } from "azure-sb";
-import { table } from "table"
+import { table } from "table";
 import Topic = Azure.ServiceBus.Results.Models.Topic;
 import Subscription = Azure.ServiceBus.Results.Models.Subscription;
 import * as fp from "lodash/fp";
-import {promisify} from "util";
+import { promisify } from "util";
+import { logger } from "./utils/logger";
 
 const _serviceBusService: ServiceBusService = azure.createServiceBusService();
 const _listTopicsAsync: any = promisify(_serviceBusService.listTopics).bind(_serviceBusService);
@@ -76,13 +77,13 @@ const listSubsTopic = async (topic: string) => {
 if (!program.args[0]) {
     listSubsAllTopics()
         .catch(e => {
-            console.log(e);
+            logger.error(e);
         });
 } else {
     const topic = program.args[0];
     listSubsTopic(topic)
         .catch(e => {
-            console.log(e);
+            logger.error(e);
         });
 }
 

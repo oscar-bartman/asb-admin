@@ -1,4 +1,4 @@
-import { setupServiceBus } from "./builder/setup";
+import { setupServiceBus } from "./utils/setup";
 
 export {
     setupServiceBus

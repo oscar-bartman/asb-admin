@@ -21,10 +21,7 @@
   },
   "homepage": "https://github.com/oscar-bartman/asb-admin#readme",
   "dependencies": {
-    "@grandvision/event-processor": "file:../grandvision/event-processor",
-    "@types/azure-sb": "0.0.33",
-    "@types/table": "^4.0.5",
-    "@types/winston": "^2.4.4",
+    "@grandvision/event-processor": "^0.1.1",
     "azure": "^2.3.1-preview",
     "commander": "^2.19.0",
     "dotenv": "^6.2.0",
@@ -33,9 +30,12 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@types/azure-sb": "0.0.33",
+    "@types/table": "^4.0.5",
     "@types/dotenv": "^6.1.0",
     "@types/lodash": "^4.14.120",
     "@types/node": "^10.12.18",
+    "@types/winston": "^2.4.4",
     "azure-sb": "^0.10.6",
     "typescript": "^3.2.4"
   },
