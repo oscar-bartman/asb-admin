@@ -18,19 +18,24 @@ if (!program.args[0] || !program.args[1]) {
 const runDrainDlq = async () => {
     const topicPath: string = program.args[0];
     const subscriptionPath: string = `${program.args[1]}/$DeadLetterQueue`;
+    // set isPeekLock to false because we just want to delete everything out of this queue
     const options: ReceiveSubscriptionMessageOptions = {
-        isPeekLock: true
+        isPeekLock: false
     };
 
     interface Summary {
         messageId: string;
-        info: string;
+        body: string;
     }
 
     const messageSummaries: Summary[] = [];
 
+    let receiving: boolean = true;
+
     const callback: TypedResultAndResponseCallback<Message> = async (error: any, message: any) => {
-        if (error) {
+        if (error && error === "No messages to receive") {
+            receiving = false;
+        } else if (error) {
             logger.error("An error occurred while receiving a message.");
             process.exit(1);
         }
@@ -39,18 +44,13 @@ const runDrainDlq = async () => {
 
         messageSummaries.push({
             messageId: message.brokerProperties.MessageId,
-            info: message.customProperties.deadletterreason
-        });
-
-        _serviceBusService.unlockMessage(message, (error1: any) => {
-            if (error1) {
-                logger.error("An error occurred while trying to unlock a message");
-                process.exit(1);
-            }
+            body: message.body
         });
     };
 
-    _serviceBusService.receiveSubscriptionMessage(topicPath, subscriptionPath, options, callback)
+    while (receiving) {
+        _serviceBusService.receiveSubscriptionMessage(topicPath, subscriptionPath, options, callback)
+    }
 };
 
 runDrainDlq().catch(e => {
