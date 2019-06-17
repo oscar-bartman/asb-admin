@@ -1,37 +1,55 @@
 import * as program from "commander";
-import { EventService } from "@grandvision/event-processor";
-import { send } from "./utils/sender"
-import { Event } from "./models/Event";
+import { ServiceBusClient, SendableMessageInfo } from "@azure/service-bus";
+import * as fs from "fs";
 import { logger } from "./utils/logger";
 
-// todo enable to pass explicit event to send on CLI (requires validating the event with existing models, should check if this is a desired feature first).
 program
     .parse(process.argv);
 
-const runSend = async (topic: string, load: number) => {
-    const eventService = new EventService({
-        serviceBusConnectionStr: process.env.AZURE_SERVICEBUS_CONNECTION_STRING || "",
-        messagePollingIntervalMs: parseInt(process.env.MESSAGE_POLLING_INTERVAL_MS || "")
-    }, logger);
+const connectionString = process.env["AZURE_SERVICEBUS_CONNECTION_STRING"] || "";
+let _serviceBusClient: ServiceBusClient;
 
-    let events: Event[] = [];
-    for (let i = 0; i < load; i++) {
-        events.push({
-            id: i,
-            message: JSON.stringify({ foo: "bar" })
-        });
+const runSend = async (topic: string, file: string) => {
+    let messageBody: any;
+
+    // TODO clean this up, messageBody isn't necessary but I want the option to send 
+    // either a string or an object so we can see how azure handles handles either one.
+    if (file) {
+        const payload: string = fs.readFileSync(file, { encoding: "utf8" });
+        let parsed: any;
+        try {
+            parsed = JSON.parse(payload);
+        } catch (err) {
+            logger.error(`[SEND]: Could not parse given file, invalid JSON.`)
+            process.exit(1);
+        }
+        messageBody = parsed;
     }
 
-    await send(topic, events, eventService);
+    _serviceBusClient = ServiceBusClient.createFromConnectionString(connectionString);
+
+    const topicClient = _serviceBusClient.createTopicClient(topic);
+    const sender = topicClient.createSender();
+
+    const message: SendableMessageInfo = {
+        body: messageBody
+    };
+
+    await sender.send(message)
+
+    await _serviceBusClient.close();
 };
 
-const topic: string = program.args[0];
-const load: number = parseInt(program.args[1]);
+const [
+    topic,
+    file
+] = program.args;
 
-if (!topic || !load) {
-    console.log("I need a topic and load.")
+if (!topic) {
+    console.log("[SEND]: I need a topic and a file to read from.")
 } else {
-    runSend(topic, load).catch(e => {
-        console.log(e);
+    runSend(topic, file).catch(err => {
+        logger.error(`[SEND]: Error occurred while trying to send a message to topic: ${topic}.` , err);
+        process.exit(1);    
     });
 }

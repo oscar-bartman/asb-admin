@@ -9,7 +9,7 @@ import { ServiceBusService } from "azure-sb";
 import * as azure from "azure-sb";
 import { send } from "./utils/sender";
 
-const _serviceBusService: ServiceBusService = azure.createServiceBusService();
+let _serviceBusService: ServiceBusService;
 
 const logger = winston.createLogger({
     level: "info", transports: new winston.transports.Console()
@@ -36,6 +36,9 @@ const config = [{
 }];
 
 const runLoad = async (load: number) => {
+
+    _serviceBusService = azure.createServiceBusService();
+
     // init event processor
     const eventServiceConfig = {
         serviceBusConnectionStr: process.env.AZURE_SERVICEBUS_CONNECTION_STRING || "",

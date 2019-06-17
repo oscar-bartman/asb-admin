@@ -1,0 +1,448 @@
+{
+    "type": "OrderCreated",
+    "id": "de2c9e08-0b55-4f32-9511-b2d58cf380aa",
+    "version": 4,
+    "sequenceNumber": 4,
+    "resource": {
+        "typeId": "order",
+        "id": "de2c9e08-0b55-4f32-9511-b2d58cf380aa"
+    },
+    "resourceVersion": 4,
+    "createdAt": "2019-05-24T05:35:32.975Z",
+    "lastModifiedAt": "2019-05-24T05:36:32.923Z",
+    "order": {
+        "type": "Order",
+        "id": "de2c9e08-0b55-4f32-9511-b2d58cf380aa",
+        "version": 4,
+        "lastMessageSequenceNumber": 4,
+        "createdAt": "2019-05-24T05:35:32.975Z",
+        "lastModifiedAt": "2019-05-24T05:36:32.923Z",
+        "lastModifiedBy": {
+            "clientId": "t7sPcqqAe3DGV4sTvTp8teJ3",
+            "isPlatformClient": false
+        },
+        "createdBy": {
+            "clientId": "t7sPcqqAe3DGV4sTvTp8teJ3",
+            "isPlatformClient": false
+        },
+        "orderNumber": "0000007491",
+        "customerEmail": "grandvision.tester@gmail.com",
+        "totalPrice": {
+            "type": "centPrecision",
+            "currencyCode": "EUR",
+            "centAmount": 1701,
+            "fractionDigits": 2
+        },
+        "taxedPrice": {
+            "totalNet": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 1636,
+                "fractionDigits": 2
+            },
+            "totalGross": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 1701,
+                "fractionDigits": 2
+            },
+            "taxPortions": [
+                {
+                    "rate": 0.04,
+                    "amount": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 65,
+                        "fractionDigits": 2
+                    },
+                    "name": "Medicinal"
+                },
+                {
+                    "rate": 0.22,
+                    "amount": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 0,
+                        "fractionDigits": 2
+                    },
+                    "name": "standard"
+                }
+            ]
+        },
+        "country": "IT",
+        "orderState": "Confirmed",
+        "paymentState": "Paid",
+        "syncInfo": [],
+        "returnInfo": [],
+        "shippingInfo": {
+            "shippingMethodName": "home-delivery",
+            "price": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 0,
+                "fractionDigits": 2
+            },
+            "shippingRate": {
+                "price": {
+                    "type": "centPrecision",
+                    "currencyCode": "EUR",
+                    "centAmount": 0,
+                    "fractionDigits": 2
+                },
+                "tiers": []
+            },
+            "taxRate": {
+                "name": "standard",
+                "amount": 0.22,
+                "includedInPrice": true,
+                "country": "IT",
+                "id": "DYUmlDkN",
+                "subRates": []
+            },
+            "taxCategory": {
+                "typeId": "tax-category",
+                "id": "b65e7797-c833-441a-a5d6-3737af1bf744"
+            },
+            "deliveries": [],
+            "shippingMethod": {
+                "typeId": "shipping-method",
+                "id": "04a1cfbb-4279-4b1b-b748-f23b57e0b769"
+            },
+            "taxedPrice": {
+                "totalNet": {
+                    "type": "centPrecision",
+                    "currencyCode": "EUR",
+                    "centAmount": 0,
+                    "fractionDigits": 2
+                },
+                "totalGross": {
+                    "type": "centPrecision",
+                    "currencyCode": "EUR",
+                    "centAmount": 0,
+                    "fractionDigits": 2
+                }
+            },
+            "shippingMethodState": "MatchesCart"
+        },
+        "taxMode": "Platform",
+        "inventoryMode": "None",
+        "taxRoundingMode": "HalfEven",
+        "taxCalculationMode": "LineItemLevel",
+        "origin": "Customer",
+        "lineItems": [
+            {
+                "id": "c06a0e6c-e2c1-4b89-aadf-55bb466cd6f4",
+                "productId": "af0737f0-2183-42cd-964e-daae04b4a4b2",
+                "name": {
+                    "it": "Focus Dailies All Day Comfort",
+                    "en": "Focus Dailies All Day Comfort"
+                },
+                "productType": {
+                    "typeId": "product-type",
+                    "id": "932f8202-b7d8-456c-9898-f4f5f240b5ff",
+                    "version": 3
+                },
+                "productSlug": {
+                    "en": "Focus_Dailies_All_Day_Comfort-30_630175461674",
+                    "it": "Focus_Dailies_All_Day_Comfort-30_630175461674"
+                },
+                "variant": {
+                    "id": 1,
+                    "sku": "630175461674",
+                    "prices": [
+                        {
+                            "value": {
+                                "type": "centPrecision",
+                                "currencyCode": "EUR",
+                                "centAmount": 1890,
+                                "fractionDigits": 2
+                            },
+                            "id": "fcca9b2b-7ad2-4a64-ba7f-1a8fea0ea39a",
+                            "discounted": {
+                                "value": {
+                                    "type": "centPrecision",
+                                    "currencyCode": "EUR",
+                                    "centAmount": 1701,
+                                    "fractionDigits": 2
+                                },
+                                "discount": {
+                                    "typeId": "product-discount",
+                                    "id": "c6edc6ce-9f06-49c9-a04c-682d181ccef8"
+                                }
+                            }
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "focus_dailies_all_day_comfort_30_front.jpg",
+                            "dimensions": {
+                                "w": 0,
+                                "h": 0
+                            }
+                        }
+                    ],
+                    "attributes": [
+                        {
+                            "name": "replacementFrequency",
+                            "value": {
+                                "it": "Giornaliere",
+                                "en": "Daily"
+                            }
+                        },
+                        {
+                            "name": "cbBasics",
+                            "value": true
+                        },
+                        {
+                            "name": "cbHydration",
+                            "value": false
+                        },
+                        {
+                            "name": "cbSoftness",
+                            "value": true
+                        },
+                        {
+                            "name": "cbBreathability",
+                            "value": false
+                        },
+                        {
+                            "name": "cbFatigue",
+                            "value": false
+                        },
+                        {
+                            "name": "cbUV",
+                            "value": false
+                        },
+                        {
+                            "name": "convenience",
+                            "value": {
+                                "it": "Goditi un nuovo paio di lenti ogni giorno, non dovrai pulirle o riporle.",
+                                "en": "Enjoy a fresh pair every day, no need to clean or store."
+                            }
+                        },
+                        {
+                            "name": "target",
+                            "value": {
+                                "it": "Per coloro che desiderano lenti giornaliere convenienti e di gran qualità.",
+                                "en": "For wearers who want convenient daily lenses and great value."
+                            }
+                        },
+                        {
+                            "name": "materialType",
+                            "value": {
+                                "it": "Hydrogel",
+                                "en": "Hydrogel"
+                            }
+                        },
+                        {
+                            "name": "material",
+                            "value": {
+                                "it": "Nelfilcon A",
+                                "en": "Nelfilcon A"
+                            }
+                        },
+                        {
+                            "name": "waterContent",
+                            "value": {
+                                "en": "69%"
+                            }
+                        },
+                        {
+                            "name": "lensType",
+                            "value": {
+                                "it": "Sferica",
+                                "en": "Spheric"
+                            }
+                        },
+                        {
+                            "name": "UVFilter",
+                            "value": {
+                                "en": "None"
+                            }
+                        },
+                        {
+                            "name": "handlingTint",
+                            "value": true
+                        },
+                        {
+                            "name": "supplier",
+                            "value": "Alcon"
+                        },
+                        {
+                            "name": "exclusiveBrand",
+                            "value": false
+                        },
+                        {
+                            "name": "packageQuantity",
+                            "value": 30
+                        },
+                        {
+                            "name": "usage",
+                            "value": {
+                                "it": "Per un utilizzo quotidiano o occasionale, alternate agli occhiali da vista.",
+                                "en": "Daily or occasionally when you want to alternate with glasses."
+                            }
+                        },
+                        {
+                            "name": "brandKey",
+                            "value": "Focus_Dailies_All_Day_Comfort"
+                        },
+                        {
+                            "name": "erpId",
+                            "value": "R000038405"
+                        },
+                        {
+                            "name": "baseCurve",
+                            "value": "8,6"
+                        },
+                        {
+                            "name": "diameter",
+                            "value": "13,8"
+                        },
+                        {
+                            "name": "power",
+                            "value": "-5,25"
+                        },
+                        {
+                            "name": "description",
+                            "value": {
+                                "en": "Grazie a queste lenti a contatto Focus Dailies All Day Comfort semplici da applicare puoi goderti un nuovo paio di lenti comode ogni giorno a un ottimo prezzo."
+                            }
+                        },
+                        {
+                            "name": "header",
+                            "value": {
+                                "it": "Ogni giorno è una nuova giornata luminosa.",
+                                "en": "Every day is a bright new day."
+                            }
+                        }
+                    ],
+                    "assets": []
+                },
+                "price": {
+                    "value": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1890,
+                        "fractionDigits": 2
+                    },
+                    "id": "fcca9b2b-7ad2-4a64-ba7f-1a8fea0ea39a",
+                    "discounted": {
+                        "value": {
+                            "type": "centPrecision",
+                            "currencyCode": "EUR",
+                            "centAmount": 1701,
+                            "fractionDigits": 2
+                        },
+                        "discount": {
+                            "typeId": "product-discount",
+                            "id": "c6edc6ce-9f06-49c9-a04c-682d181ccef8"
+                        }
+                    }
+                },
+                "quantity": 1,
+                "discountedPricePerQuantity": [],
+                "taxRate": {
+                    "name": "Medicinal",
+                    "amount": 0.04,
+                    "includedInPrice": true,
+                    "country": "IT",
+                    "id": "iAmdB0di",
+                    "subRates": []
+                },
+                "state": [
+                    {
+                        "quantity": 1,
+                        "state": {
+                            "typeId": "state",
+                            "id": "dbda4b51-0dfa-4752-bd0a-0f7cef31630a"
+                        }
+                    }
+                ],
+                "priceMode": "Platform",
+                "totalPrice": {
+                    "type": "centPrecision",
+                    "currencyCode": "EUR",
+                    "centAmount": 1701,
+                    "fractionDigits": 2
+                },
+                "taxedPrice": {
+                    "totalNet": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1636,
+                        "fractionDigits": 2
+                    },
+                    "totalGross": {
+                        "type": "centPrecision",
+                        "currencyCode": "EUR",
+                        "centAmount": 1701,
+                        "fractionDigits": 2
+                    }
+                },
+                "custom": {
+                    "type": {
+                        "typeId": "type",
+                        "id": "2b862caf-0421-4e40-8e15-df89ed96facd"
+                    },
+                    "fields": {
+                        "eyeSide": "right"
+                    }
+                },
+                "lineItemMode": "Standard"
+            }
+        ],
+        "customLineItems": [],
+        "transactionFee": true,
+        "discountCodes": [],
+        "cart": {
+            "typeId": "cart",
+            "id": "bdf0c63d-05d4-40b5-bd68-1df4e66dd8f1"
+        },
+        "custom": {
+            "type": {
+                "typeId": "type",
+                "id": "34dc5e97-66b3-41e2-98a9-c9dd12d72536"
+            },
+            "fields": {
+                "recipientCode": "",
+                "secondaryEmail": "",
+                "customerCode": "MLLSNT82P65Z404U"
+            }
+        },
+        "paymentInfo": {
+            "payments": [
+                {
+                    "typeId": "payment",
+                    "id": "33d64575-f6d2-40d8-95ae-709266d7e656"
+                }
+            ]
+        },
+        "shippingAddress": {
+            "firstName": "WebdriverIO",
+            "lastName": "Selenium",
+            "streetName": "BillingStreet",
+            "streetNumber": "123",
+            "additionalStreetInfo": "err",
+            "postalCode": "12345",
+            "city": "Thecitty",
+            "region": "GV",
+            "country": "IT",
+            "phone": "1234567890"
+        },
+        "billingAddress": {
+            "firstName": "WebdriverIO",
+            "lastName": "Selenium",
+            "streetName": "BillingStreet",
+            "streetNumber": "123",
+            "additionalStreetInfo": "err",
+            "postalCode": "12345",
+            "city": "Thecitty",
+            "region": "GV",
+            "country": "IT",
+            "phone": "1234567890"
+        },
+        "itemShippingAddresses": [],
+        "refusedGifts": []
+    }
+}

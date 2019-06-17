@@ -6,8 +6,8 @@ import * as azure from "azure-sb";
 import Topic = Azure.ServiceBus.Results.Models.Topic;
 import { tearDownServiceBus } from "./utils/teardown";
 
-const _serviceBusService: ServiceBusService = azure.createServiceBusService();
-const _listTopicsAsync: any = promisify(_serviceBusService.listTopics).bind(_serviceBusService);
+let _serviceBusService: ServiceBusService;
+let _listTopicsAsync: any;
 
 program
     .option("-p, --prefix <prefix>", "teardown all topics with a certain prefix")
@@ -16,6 +16,9 @@ program
 let file: string;
 
 const runTearDown = async () => {
+    _serviceBusService = azure.createServiceBusService();
+    _listTopicsAsync = promisify(_serviceBusService.listTopics).bind(_serviceBusService);
+
     // todo type config object
     let config = [];
 

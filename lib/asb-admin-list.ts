@@ -8,10 +8,9 @@ import * as fp from "lodash/fp";
 import { promisify } from "util";
 import { logger } from "./utils/logger";
 
-const _serviceBusService: ServiceBusService = azure.createServiceBusService();
-const _listTopicsAsync: any = promisify(_serviceBusService.listTopics).bind(_serviceBusService);
-const _listSubscriptionsAsync: any = promisify(_serviceBusService.listSubscriptions).bind(_serviceBusService);
-
+let _serviceBusService: ServiceBusService;
+let _listSubscriptionsAsync: any;
+let _listTopicsAsync: any;
 const _toCommaSeparated = fp.reduce((acc: string, sub: Subscription) => `${sub.SubscriptionName}${acc ? `, ${acc}` : ""}`, "");
 const _drawOptions = {
     drawHorizontalLine: (index: number, size: number) => {
@@ -23,6 +22,10 @@ program
     .parse(process.argv);
 
 const listSubsAllTopics = async () => {
+    _serviceBusService = azure.createServiceBusService();
+    _listTopicsAsync = promisify(_serviceBusService.listTopics).bind(_serviceBusService);
+    _listSubscriptionsAsync = promisify(_serviceBusService.listSubscriptions).bind(_serviceBusService);
+
     let topics: Topic[];
     try {
         topics = await _listTopicsAsync();
