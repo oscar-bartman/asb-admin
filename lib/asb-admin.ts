@@ -9,5 +9,5 @@ program
     .command("send [topic] [file]", "send a payload to a topic")
     .command("drain [topic] [subscription]", "reads from a sub and deletes each message after logging it")
     .command("add-subscription [topic] [subscription]", "adds a subscription to a topic")
-    .command("delete-subscription [topic] [subscription]", "removes a subscription from a topic")
+    .command("delete-subscription [topic] [subscription]", "deletes a subscription from a topic")
     .parse(process.argv);
