@@ -1,5 +1,8 @@
 #! /usr/bin/env node
 import * as program from "commander";
+import { header } from "./utils/header";
+
+header();
 
 program
     .version("0.0.1", "-v, --version")
