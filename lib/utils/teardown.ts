@@ -2,12 +2,12 @@ import * as _ from "lodash";
 import { ServiceBusService } from "azure-sb";
 import { promisify } from "util";
 import { logger } from "./logger";
-import { BusConfig } from "../models/Event";
 
-// todo move to utils?
-export const tearDownServiceBus = async (config: BusConfig[], serviceBusService: ServiceBusService) => {
+export async function tearDownServiceBus(config: {
+    topic: string;
+    subscription?: string;
+}[], serviceBusService: ServiceBusService) {
     const deleteTopicAsync = promisify(serviceBusService.deleteTopic).bind(serviceBusService);
-    // todo type topicToSub and config object
     const uniqTopics = _(config)
         .map(busConfig => busConfig.topic)
         .uniq()

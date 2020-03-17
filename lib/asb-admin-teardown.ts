@@ -5,6 +5,7 @@ import { Azure, ServiceBusService } from "azure-sb";
 import * as azure from "azure-sb";
 import Topic = Azure.ServiceBus.Results.Models.Topic;
 import { tearDownServiceBus } from "./utils/teardown";
+import { logger } from "./utils/logger";
 
 let _serviceBusService: ServiceBusService;
 let _listTopicsAsync: any;
@@ -23,7 +24,7 @@ const runTearDown = async () => {
     let config = [];
 
     if (program.prefix) {
-        console.log("found prefix");
+        logger.info("found prefix");
         const topics: Topic[] = await _listTopicsAsync();
         topics
             .filter((topic: Topic) => topic.TopicName.startsWith(program.prefix))
@@ -31,7 +32,7 @@ const runTearDown = async () => {
                 config.push({ topic: topic.TopicName });
             });
     } else {
-        console.log("no prefix");
+        logger.info("no prefix");
         if (!program.args[0]) {
             file = `${process.cwd()}/bus-config.json`
         } else {
@@ -41,16 +42,15 @@ const runTearDown = async () => {
         config = JSON.parse(file);
     }
 
-    console.log(config);
     await tearDownServiceBus(config, _serviceBusService);
 };
 
 runTearDown().then(() => {
-    console.log("Successfully tore down service bus configuration.")
+    logger.info("Successfully tore down service bus configuration.")
 }).catch(e => {
     if (e.statusCode === 404) {
-        console.log(e.detail);
+        logger.error(e.detail);
     } else {
-        console.error(e);
+        logger.error(e);
     }
 });

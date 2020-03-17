@@ -1,8 +1,27 @@
-import { Event } from "../models/Event";
-import { EventService } from "@grandvision/event-processor";
+import { ServiceBusClient } from "@azure/service-bus";
 
-export const send = async (topic: string, events: Event[], eventService: EventService) => {
-    for (let i = 0; i < events.length; i++) {
-        await eventService.sendMessage(topic, JSON.stringify(events[i]));
-    }
-};
+export async function send({ connectionString, topicName, payload }: { connectionString: string; topicName: string, payload: string }) {
+    const client = makeTopicClient({ connectionString, topicName })
+
+    const sender = client.createSender();
+
+    await sender.send({ body: payload });
+
+    await client.close();
+}
+
+export async function sendBatch({ connectionString, topicName, payload }: { connectionString: string; topicName: string, payload: string[] }) {
+    const client = makeTopicClient({ connectionString, topicName })
+
+    const sender = client.createSender();
+
+    await sender.sendBatch(payload.map(e => ({ body: e })))
+
+    await client.close();
+}
+
+function makeTopicClient({ connectionString, topicName }: { connectionString: string; topicName: string }) {
+    return ServiceBusClient
+        .createFromConnectionString(connectionString)
+        .createTopicClient(topicName)
+}

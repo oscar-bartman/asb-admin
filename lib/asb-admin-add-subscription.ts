@@ -22,6 +22,6 @@ const addSubscription = async (topicPath: string, subscriptionPath: string) => {
 
 addSubscription(program.args[0], program.args[1])
   .then(() => {
-    console.log(`added subscription '${program.args[1]}' on topic '${program.args[0]}'`);
+    logger.info(`added subscription '${program.args[1]}' on topic '${program.args[0]}'`);
   })
-  .catch(err => console.log(err));
+  .catch(err => logger.error(err));

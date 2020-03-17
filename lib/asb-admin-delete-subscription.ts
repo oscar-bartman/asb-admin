@@ -22,6 +22,6 @@ const deleteSubscription = async (topicPath: string, subscriptionPath: string) =
 
 deleteSubscription(program.args[0], program.args[1])
   .then(() => {
-    console.log(`deleted subscription '${program.args[1]}' from topic '${program.args[0]}'`);
+    logger.info(`deleted subscription '${program.args[1]}' from topic '${program.args[0]}'`);
   })
-  .catch(err => console.log(err));
+  .catch(err => logger.error(err));
