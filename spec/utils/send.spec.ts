@@ -1,6 +1,7 @@
 import { send } from "../../lib/utils/send"
 import { makeTopicClient } from "../../lib/utils/makeTopicClient"
 
+jest.mock("../../lib/utils/logger")
 jest.mock("../../lib/utils/makeTopicClient", () => ({
     makeTopicClient: jest.fn().mockReturnValue({
         createSender: jest.fn().mockReturnValue({

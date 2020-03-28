@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+// eslint-disable-next-line no-unused-vars
 import { ServiceBusService } from "azure-sb";
 import { promisify } from "util";
 import { logger } from "./logger";
@@ -17,4 +18,4 @@ export async function tearDownServiceBus(config: {
     await Promise.all(uniqTopics.map((uniqTopic: string) => {
         return deleteTopicAsync(uniqTopic);
     }));
-};
+}
