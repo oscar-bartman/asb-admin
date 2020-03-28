@@ -3,9 +3,8 @@ import * as fs from "fs";
 import { promisify } from "util";
 import { Azure, ServiceBusService } from "azure-sb";
 import * as azure from "azure-sb";
-import Topic = Azure.ServiceBus.Results.Models.Topic;
-import { tearDownServiceBus } from "./utils/teardown";
-import { logger } from "./utils/logger";
+import { tearDownServiceBus } from "./utils";
+import { logger } from "./utils";
 
 let _serviceBusService: ServiceBusService;
 let _listTopicsAsync: any;
@@ -15,6 +14,8 @@ program
     .parse(process.argv);
 
 let file: string;
+
+type Topic = Azure.ServiceBus.Results.Models.Topic;
 
 const runTearDown = async () => {
     _serviceBusService = azure.createServiceBusService();

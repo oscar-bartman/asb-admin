@@ -1,7 +1,7 @@
 import * as program from "commander";
 import * as fs from "fs";
 import { logger } from "./utils/logger";
-import { sendBatch, send } from "./utils/sender";
+import { send } from "./utils";
 
 program
     .parse(process.argv);
@@ -15,11 +15,7 @@ async function runSend({ topic, file }: { topic: string, file: string }) {
         messageBody = JSON.parse(payload);
     }
 
-    if (Array.isArray(messageBody)) {
-        await sendBatch({ connectionString, topicName: topic, payload: messageBody })
-    } else {
-        await send({ connectionString, topicName: topic, payload: messageBody })
-    }
+    await send({ connectionString, topicName: topic, payload: messageBody })
 };
 
 

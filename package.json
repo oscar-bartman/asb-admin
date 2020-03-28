@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "node ./bin/asb-admin.js",
-    "build": "tsc"
+    "build": "./node_modules/.bin/babel --extensions \".ts\" lib --out-dir bin",
+    "test": "jest ./spec/**/**.spec.ts"
   },
   "repository": {
     "type": "git",
@@ -29,11 +30,18 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-typescript": "^7.8.3",
     "@types/azure-sb": "0.0.33",
-    "@types/table": "^4.0.5",
+    "@types/jest": "^25.1.4",
     "@types/lodash": "^4.14.120",
     "@types/node": "^10.12.18",
+    "@types/table": "^4.0.5",
     "@types/winston": "^2.4.4",
+    "babel-jest": "^25.1.0",
+    "jest": "^25.1.0",
     "typescript": "^3.2.4"
   },
   "bin": {
