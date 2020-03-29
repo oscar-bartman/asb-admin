@@ -3,5 +3,14 @@ import { promisify } from "util";
 
 const serviceBusService = azure.createServiceBusService();
 
-export const createTopicIfNotExistsAsync = promisify(serviceBusService.createTopicIfNotExists).bind(serviceBusService);
-export const createSubscriptionAsync = promisify(serviceBusService.createSubscription).bind(serviceBusService);
+export const createTopicIfNotExistsAsync = promisify(
+    serviceBusService.createTopicIfNotExists
+).bind(serviceBusService);
+
+export const createSubscriptionAsync = promisify(
+    serviceBusService.createSubscription
+).bind(serviceBusService);
+
+export const deleteTopicAsync = promisify(serviceBusService.deleteTopic).bind(
+    serviceBusService
+);

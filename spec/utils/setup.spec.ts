@@ -1,4 +1,4 @@
-import { setup } from "../../lib/utils";
+import { setup } from "../../lib/utils/setup";
 import {
     createTopicIfNotExistsAsync,
     createSubscriptionAsync
