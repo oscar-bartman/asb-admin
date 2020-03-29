@@ -14,3 +14,15 @@ export const createSubscriptionAsync = promisify(
 export const deleteTopicAsync = promisify(serviceBusService.deleteTopic).bind(
     serviceBusService
 );
+
+export const listTopicsAsync = promisify(serviceBusService.listTopics).bind(
+    serviceBusService
+);
+
+export const listSubscriptionsAsync = promisify(
+    serviceBusService.listSubscriptions
+).bind(serviceBusService);
+
+export const deleteSubscriptionAsync = promisify(
+    serviceBusService.deleteSubscription
+).bind(serviceBusService);

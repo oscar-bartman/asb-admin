@@ -1,14 +1,9 @@
+// eslint-disable-next-line no-unused-vars
+import { Azure } from "azure-sb";
 import * as program from "commander";
 import * as fs from "fs";
-import { promisify } from "util";
-// eslint-disable-next-line no-unused-vars
-import { Azure, ServiceBusService } from "azure-sb";
-import * as azure from "azure-sb";
-import { tearDown } from "./utils";
-import { logger } from "./utils";
-
-let _serviceBusService: ServiceBusService;
-let _listTopicsAsync: any;
+import { logger, tearDown } from "./utils";
+import { listTopicsAsync } from "./utils/serviceBusServiceAsync";
 
 program
     .option(
@@ -22,17 +17,12 @@ let file: string;
 type Topic = Azure.ServiceBus.Results.Models.Topic;
 
 const runTearDown = async () => {
-    _serviceBusService = azure.createServiceBusService();
-    _listTopicsAsync = promisify(_serviceBusService.listTopics).bind(
-        _serviceBusService
-    );
-
     // todo type config object
     let config = [];
 
     if (program.prefix) {
         logger.info("found prefix");
-        const topics: Topic[] = await _listTopicsAsync();
+        const topics: Topic[] = await listTopicsAsync();
         topics
             .filter((topic: Topic) =>
                 topic.TopicName.startsWith(program.prefix)

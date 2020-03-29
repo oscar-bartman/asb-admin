@@ -1,8 +1,8 @@
 #! /usr/bin/env node
-import * as program from "commander"
-import { header } from "./utils/header"
+import * as program from "commander";
+import { header } from "./utils/header";
 
-header()
+header();
 
 program
     .version("0.0.1", "-v, --version")
@@ -26,4 +26,4 @@ program
         "delete-subscription [topic] [subscription]",
         "deletes a subscription from a topic"
     )
-    .parse(process.argv)
+    .parse(process.argv);
