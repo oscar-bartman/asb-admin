@@ -4,10 +4,7 @@ import { table } from "table";
 import * as fp from "lodash/fp";
 import { promisify } from "util";
 import { logger } from "./utils/logger";
-import {
-    listTopicsAsync,
-    listSubscriptionsAsync
-} from "./utils/serviceBusServiceAsync";
+import { listTopicsAsync, listSubscriptionsAsync } from "./asb";
 
 const toCommaSeparated = fp.reduce(
     (acc: string, sub: { SubscriptionName: string }) =>

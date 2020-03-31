@@ -1,8 +1,7 @@
 import { tearDown } from "../../lib/utils/teardown";
-import { deleteTopicAsync } from "../../lib/utils/serviceBusServiceAsync";
+import { deleteTopicAsync } from "../../lib/asb";
 
-jest.mock("../../lib/utils/logger");
-jest.mock("../../lib/utils/serviceBusServiceAsync", () => ({
+jest.mock("../../lib/asb", () => ({
     deleteTopicAsync: jest.fn()
 }));
 jest.mock("../../lib/utils/logger");

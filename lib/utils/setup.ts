@@ -1,8 +1,5 @@
 import { logger } from "./logger";
-import {
-    createTopicIfNotExistsAsync,
-    createSubscriptionAsync
-} from "./serviceBusServiceAsync";
+import { createTopicIfNotExistsAsync, createSubscriptionAsync } from "../asb";
 
 export async function setup(
     config: {

@@ -1,12 +1,18 @@
-import { makeTopicClient } from "./makeTopicClient";
+import { makeTopicClient } from "../asb";
 
-export async function send({ connectionString, topicName, payload }: { connectionString: string; topicName: string, payload: object | object[] }) {
-    const client = makeTopicClient({ connectionString, topicName })
+export async function send({
+    topicName,
+    payload
+}: {
+    topicName: string;
+    payload: object | object[];
+}) {
+    const client = makeTopicClient({ topicName });
 
     const sender = client.createSender();
 
     if (Array.isArray(payload)) {
-        await sender.sendBatch(payload.map(e => ({ body: e })))
+        await sender.sendBatch(payload.map((e) => ({ body: e })));
     } else {
         await sender.send({ body: payload });
     }

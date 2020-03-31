@@ -3,7 +3,7 @@ import { Azure } from "azure-sb";
 import * as program from "commander";
 import * as fs from "fs";
 import { logger, tearDown } from "./utils";
-import { listTopicsAsync } from "./utils/serviceBusServiceAsync";
+import { listTopicsAsync } from "./asb";
 
 program
     .option(

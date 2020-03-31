@@ -2,10 +2,10 @@ import { setup } from "../../lib/utils/setup";
 import {
     createTopicIfNotExistsAsync,
     createSubscriptionAsync
-} from "../../lib/utils/serviceBusServiceAsync";
+} from "../../lib/asb";
 import { logger } from "../../lib/utils/logger";
 
-jest.mock("../../lib/utils/serviceBusServiceAsync", () => ({
+jest.mock("../../lib/asb", () => ({
     createTopicIfNotExistsAsync: jest.fn(),
     createSubscriptionAsync: jest.fn()
 }));

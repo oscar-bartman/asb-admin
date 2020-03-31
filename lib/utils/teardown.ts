@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import { logger } from "./logger";
-import { deleteTopicAsync } from "./serviceBusServiceAsync";
+import { deleteTopicAsync } from "../asb";
 
 export async function tearDown(
     config: {

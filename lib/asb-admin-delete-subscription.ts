@@ -1,6 +1,6 @@
 import * as program from "commander";
 import { logger } from "./utils";
-import { deleteSubscriptionAsync } from "./utils/serviceBusServiceAsync";
+import { deleteSubscriptionAsync } from "./asb";
 
 program.parse(process.argv);
 
