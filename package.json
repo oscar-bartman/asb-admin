@@ -4,7 +4,7 @@
     "description": "admin tool for azure service bus",
     "main": "lib/index.js",
     "scripts": {
-        "start": "node ./bin/asb-admin.js",
+        "start": "node ./bin/cli/asb-admin.js",
         "build": "tsc",
         "test": "jest ./spec/**/**.spec.ts",
         "lint": "eslint \"./lib/**/**.ts\" \"./spec/**/**.spec.ts\"",

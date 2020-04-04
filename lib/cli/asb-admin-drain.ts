@@ -1,25 +1,25 @@
 import * as program from "commander";
-import { logger } from "./utils/logger";
+import { logger } from "../utils";
 import { delay, ReceiveMode } from "@azure/service-bus";
-import { makeSubscriptionClient } from "./asb/makeSubscriptionClient";
+import { serviceBusClient } from "../asb";
 
 program.parse(process.argv);
 
-if (!program.args[0] || !program.args[1]) {
+const [topic, subscription] = program.args;
+
+if (!topic || !subscription) {
     logger.error("I need a topic and subscription name.");
 }
 
-const runDrainDlq = async () => {
-    const client = makeSubscriptionClient({
-        topicName: program.args[0],
-        subscriptionName: program.args[1]
-    });
+(async () => {
+    const client = serviceBusClient.createSubscriptionClient(
+        topic,
+        subscription
+    );
     const receiver = client.createReceiver(ReceiveMode.peekLock);
 
     const onMessageHandler = async (brokeredMessage: any) => {
-        logger.info(
-            `Received message: ${JSON.stringify(brokeredMessage.body)}`
-        );
+        logger.info(JSON.stringify(brokeredMessage.body));
         await brokeredMessage.complete();
     };
 
@@ -35,8 +35,4 @@ const runDrainDlq = async () => {
 
     await receiver.close();
     await client.close();
-};
-
-runDrainDlq().catch((e) => {
-    logger.error(e);
-});
+})().catch((err) => logger.error(err.message));

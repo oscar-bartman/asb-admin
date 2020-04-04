@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 import * as program from "commander";
-import { header } from "./utils/header";
+import { header } from "../utils";
 
 header();
 

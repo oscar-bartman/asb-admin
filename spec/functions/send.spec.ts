@@ -1,4 +1,4 @@
-import { send } from "../../lib/utils/send";
+import { send } from "../../lib/functions/send";
 import { makeTopicClient } from "../../lib/asb";
 
 jest.mock("../../lib/utils/logger");
@@ -15,13 +15,11 @@ jest.mock("../../lib/asb", () => ({
 describe("send", () => {
     it("should call send if passed an object", async () => {
         await send({
-            connectionString: "fake",
             topicName: "fake",
             payload: { foo: "bar" }
         });
         expect(
             makeTopicClient({
-                connectionString: "",
                 topicName: ""
             }).createSender().send
         ).toBeCalled();
@@ -29,13 +27,11 @@ describe("send", () => {
 
     it("should call sendBatch if passed an array", async () => {
         await send({
-            connectionString: "fake",
             topicName: "fake",
             payload: [{ foo: "bar" }]
         });
         expect(
             makeTopicClient({
-                connectionString: "",
                 topicName: ""
             }).createSender().sendBatch
         ).toBeCalled();

@@ -1,5 +1,6 @@
 import { serviceBusClient } from "./serviceBusClient";
 
+// should be removed, export serviceBusClient directly
 export function makeSubscriptionClient({
     topicName,
     subscriptionName

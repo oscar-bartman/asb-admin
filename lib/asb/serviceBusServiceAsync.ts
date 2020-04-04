@@ -3,6 +3,7 @@ import { promisify } from "util";
 
 export const serviceBusService = azure.createServiceBusService();
 
+// all the below methods should be removed
 export const createTopicIfNotExistsAsync = promisify(
     serviceBusService.createTopicIfNotExists
 ).bind(serviceBusService);
