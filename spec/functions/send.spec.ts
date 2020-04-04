@@ -36,4 +36,16 @@ describe("send", () => {
             }).createSender().sendBatch
         ).toBeCalled();
     });
+
+    it("should call close on client", async () => {
+        await send({
+            topicName: "fake",
+            payload: [{ foo: "bar" }]
+        });
+        expect(
+            makeTopicClient({
+                topicName: ""
+            }).close
+        ).toBeCalled();
+    });
 });

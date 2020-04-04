@@ -1,7 +1,6 @@
 import * as program from "commander";
 import { logger } from "../utils";
-import { delay, ReceiveMode } from "@azure/service-bus";
-import { serviceBusClient } from "../asb";
+import { serviceBusClient, delay, ReceiveMode } from "../asb";
 
 program.parse(process.argv);
 

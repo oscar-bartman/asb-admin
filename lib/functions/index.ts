@@ -1,4 +1,3 @@
-export * from "./addSubsctipton";
 export * from "./createTopicIfNotExists";
 export * from "./createSubscription";
 export * from "./deleteTopic";
