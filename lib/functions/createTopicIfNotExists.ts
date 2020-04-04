@@ -1,6 +1,8 @@
 import { promisify } from "util";
 import { serviceBusService } from "../asb";
 
-export const createTopicIfNotExists = promisify(
-    serviceBusService.createTopicIfNotExists
-).bind(serviceBusService);
+export const createTopicIfNotExists: (
+    topicPath: string
+) => Promise<void> = promisify(serviceBusService.createTopicIfNotExists).bind(
+    serviceBusService
+);

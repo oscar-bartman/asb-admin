@@ -12,13 +12,10 @@ export async function setup(
     );
 
     await Promise.all(
-        config.map(async (busConfig) => {
-            if (busConfig.subscription) {
-                return createSubscription(
-                    busConfig.topic,
-                    busConfig.subscription
-                );
-            }
-        })
+        config.map((busConfig) =>
+            busConfig.subscription
+                ? createSubscription(busConfig.topic, busConfig.subscription)
+                : null
+        )
     );
 }
