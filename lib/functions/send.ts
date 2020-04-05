@@ -1,4 +1,4 @@
-import { makeTopicClient } from "../asb";
+import { serviceBusClient } from "../asb";
 
 export async function send({
     topicName,
@@ -7,7 +7,7 @@ export async function send({
     topicName: string;
     payload: object | object[];
 }) {
-    const client = makeTopicClient({ topicName });
+    const client = serviceBusClient.createTopicClient(topicName);
 
     const sender = client.createSender();
 

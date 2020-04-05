@@ -1,6 +1,6 @@
 import * as program from "commander";
 import { logger } from "../utils";
-import { serviceBusClient, delay, ReceiveMode } from "../asb";
+import { serviceBusClient, ReceiveMode } from "../asb";
 
 program.parse(process.argv);
 
@@ -30,7 +30,7 @@ if (!topic || !subscription) {
         autoComplete: false
     });
 
-    await delay(60000 * 10);
+    await new Promise((resolve) => setTimeout(() => resolve(), 60000 * 10));
 
     await receiver.close();
     await client.close();

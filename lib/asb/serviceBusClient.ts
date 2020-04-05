@@ -1,4 +1,3 @@
-// import { ServiceBusClient } from "@azure/service-bus";
 import { ServiceBusClient } from "@azure/service-bus";
 
 const connectionString =
@@ -8,4 +7,4 @@ export const serviceBusClient = ServiceBusClient.createFromConnectionString(
     connectionString
 );
 
-export * from "@azure/service-bus";
+export { ReceiveMode } from "@azure/service-bus";

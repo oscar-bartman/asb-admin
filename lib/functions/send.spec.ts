@@ -1,15 +1,16 @@
 import { send } from "../../lib/functions/send";
-import { makeTopicClient } from "../../lib/asb";
+import { serviceBusClient } from "../asb";
 
 jest.mock("../../lib/utils/logger");
-jest.mock("../../lib/asb", () => ({
-    makeTopicClient: jest.fn().mockReturnValue({
-        createSender: jest.fn().mockReturnValue({
-            send: jest.fn(),
-            sendBatch: jest.fn()
-        }),
-        close: jest.fn()
-    })
+jest.mock("../asb", () => ({
+    serviceBusClient: {
+        createTopicClient: jest.fn().mockReturnValue({
+            close: jest.fn(),
+            createSender: jest
+                .fn()
+                .mockReturnValue({ send: jest.fn(), sendBatch: jest.fn() })
+        })
+    }
 }));
 
 describe("send", () => {
@@ -19,9 +20,7 @@ describe("send", () => {
             payload: { foo: "bar" }
         });
         expect(
-            makeTopicClient({
-                topicName: ""
-            }).createSender().send
+            serviceBusClient.createTopicClient("topic").createSender().send
         ).toBeCalled();
     });
 
@@ -31,9 +30,7 @@ describe("send", () => {
             payload: [{ foo: "bar" }]
         });
         expect(
-            makeTopicClient({
-                topicName: ""
-            }).createSender().sendBatch
+            serviceBusClient.createTopicClient("topic").createSender().sendBatch
         ).toBeCalled();
     });
 
@@ -42,10 +39,6 @@ describe("send", () => {
             topicName: "fake",
             payload: [{ foo: "bar" }]
         });
-        expect(
-            makeTopicClient({
-                topicName: ""
-            }).close
-        ).toBeCalled();
+        expect(serviceBusClient.createTopicClient("topic").close).toBeCalled();
     });
 });
