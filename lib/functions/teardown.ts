@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { deleteTopicAsync } from "../asb";
+import { deleteTopic } from ".";
 
 // should only take a list of topics stricly speaking
 export async function tearDown(
@@ -13,7 +13,7 @@ export async function tearDown(
         .value();
 
     await Promise.all(
-        uniqTopics.map((uniqTopic: string) => deleteTopicAsync(uniqTopic))
+        uniqTopics.map((uniqTopic: string) => deleteTopic(uniqTopic))
     );
 
     return uniqTopics;

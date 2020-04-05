@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node ./bin/cli/asb-admin.js",
         "build": "tsc",
-        "test": "jest ./spec/**/**.spec.ts",
+        "test": "jest",
         "lint": "eslint \"./lib/**/**.ts\" \"./spec/**/**.spec.ts\"",
         "prettier": "prettier --write ./**/**.ts"
     },
