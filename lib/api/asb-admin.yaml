@@ -1,0 +1,45 @@
+info:
+    description: asb-admin endpoints
+    title: asb-admin
+    version: 0.0.1
+openapi: 3.0.0
+paths:
+    "/subscriptions":
+        get:
+            description: gets a list of all configured topics and subscriptions
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Subscription"
+                    description: OK
+    "/subscriptions/{topic}":
+        get:
+            description: gets a list of subscriptions to a topic
+            parameters:
+                - in: path
+                  name: topic
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Subscription"
+                    description: OK
+components:
+    schemas:
+        Subscription:
+            type: object
+            properties:
+                subscriptionName:
+                    type: string
+                topicName:
+                    type: string

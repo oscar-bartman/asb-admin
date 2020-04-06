@@ -29,6 +29,7 @@
         "azure-sb": "^0.10.6",
         "commander": "^2.19.0",
         "lodash": "^4.17.11",
+        "openapi-server": "^0.2.16",
         "table": "^5.2.1",
         "winston": "^3.2.1"
     },
