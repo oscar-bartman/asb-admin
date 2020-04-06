@@ -1,4 +1,4 @@
-import { tearDown } from "../../lib/functions/teardown";
+import { teardown } from "../../lib/functions/teardown";
 import { deleteTopic } from "../functions";
 
 jest.mock("../functions", () => ({
@@ -7,7 +7,7 @@ jest.mock("../functions", () => ({
 jest.mock("../utils/logger");
 
 describe("teardown", () => {
-    tearDown([
+    teardown([
         { topic: "testTopic1" },
         { topic: "testTopic2" },
         { topic: "testTopic2" }
@@ -32,7 +32,7 @@ describe("teardown", () => {
     });
 
     it("returns a list with topic names it has deleted", async () => {
-        const list = await tearDown([{ topic: "testTopic" }]);
+        const list = await teardown([{ topic: "testTopic" }]);
         expect(list).toEqual(["testTopic"]);
     });
 });

@@ -1,18 +1,13 @@
 import * as program from "commander";
 import { logger } from "../utils";
 import { setup } from "../functions";
-import * as fs from "fs";
+import { getBusConfig } from "./utils";
 
 program.parse(process.argv);
 
 let [file] = program.args;
 
-if (!file) {
-    file = `${process.cwd()}/bus-config.json`;
-}
-
-file = fs.readFileSync(file, "utf8");
-const config = JSON.parse(file);
+const config = getBusConfig({ file });
 
 setup(config)
     .then(() => {

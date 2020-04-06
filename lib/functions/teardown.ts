@@ -1,12 +1,7 @@
 import * as _ from "lodash";
 import { deleteTopic } from ".";
 
-// should only take a list of topics stricly speaking
-export async function tearDown(
-    config: {
-        topic: string;
-    }[]
-) {
+export async function teardown(config: { topic: string }[]) {
     const uniqTopics = _(config)
         .map((busConfig) => busConfig.topic)
         .uniq()

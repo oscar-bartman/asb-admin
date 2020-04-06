@@ -1,6 +1,7 @@
 import * as program from "commander";
-import { logger, send } from "../utils";
 import * as fs from "fs";
+import { send } from "../functions";
+import { logger } from "../utils";
 
 program.parse(process.argv);
 

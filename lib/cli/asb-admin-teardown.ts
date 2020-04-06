@@ -1,39 +1,33 @@
 import * as program from "commander";
-import * as fs from "fs";
-import { listTopics } from "../functions";
-import { tearDown } from "../functions/teardown";
+import { teardown, listTopics } from "../functions";
 import { logger } from "../utils";
+import { getBusConfig, getPrefixedTopicsConfig } from "./utils";
 
 program
     .option(
         "-p, --prefix <prefix>",
-        "teardown all topics with a certain prefix"
+        "Teardown all topics in a bus config file. Will use prefix instead if specified. Will look for bus-config.json in current directory if nothing specified"
     )
     .parse(process.argv);
 
-(async () => {
-    let config = [];
+let [file] = program.args;
+const prefix = program.prefix;
+let config = [];
 
-    if (program.prefix) {
-        const topics = await listTopics();
-        topics
-            .filter((topic: any) => topic.TopicName.startsWith(program.prefix))
-            .forEach((topic: any) => {
-                config.push({ topic: topic.TopicName });
-            });
-    } else {
-        let file;
-        if (!program.args[0]) {
-            file = `${process.cwd()}/bus-config.json`;
-        } else {
-            file = program.args[0];
-        }
-        file = fs.readFileSync(file, "utf8");
-        config = JSON.parse(file);
-    }
+if (prefix) {
+    logger.info("found prefix, tearing down topics with prefix");
+    listTopics()
+        .then((topics: { TopicName: string }[]) => {
+            config = getPrefixedTopicsConfig({ topics, prefix });
+        })
+        .catch((err: Error) => {
+            logger.error("could not get a list of topics", err);
+        });
+} else {
+    config = getBusConfig({ file });
+}
 
-    await tearDown(config);
-})()
+teardown(config)
     .then((topics) => {
         logger.info(`deleted the following topics: ${topics}`);
     })

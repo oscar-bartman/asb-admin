@@ -5,3 +5,5 @@ export * from "./listTopics";
 export * from "./listSubscriptions";
 export * from "./deleteSubscription";
 export * from "./setup";
+export * from "./teardown";
+export * from "./send";
