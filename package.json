@@ -1,6 +1,6 @@
 {
     "name": "asb-admin",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "admin tool for azure service bus",
     "main": "lib/index.js",
     "scripts": {

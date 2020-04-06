@@ -12,25 +12,29 @@ program
 
 let [file] = program.args;
 const prefix = program.prefix;
-let config = [];
 
-if (prefix) {
-    logger.info("found prefix, tearing down topics with prefix");
-    listTopics()
-        .then((topics: { TopicName: string }[]) => {
-            config = getPrefixedTopicsConfig({ topics, prefix });
-        })
-        .catch((err: Error) => {
-            logger.error("could not get a list of topics", err);
-        });
-} else {
-    config = getBusConfig({ file });
+async function runTeardown() {
+    let config = [];
+
+    if (prefix) {
+        logger.info("found prefix, tearing down topics with prefix");
+
+        const topics = await listTopics();
+
+        config = getPrefixedTopicsConfig({ topics, prefix });
+    } else {
+        config = getBusConfig({ file });
+    }
+    const topics = await teardown(config);
+    logger.info(`deleted the following topics: ${topics}`);
 }
 
-teardown(config)
-    .then((topics) => {
-        logger.info(`deleted the following topics: ${topics}`);
-    })
-    .catch((err) => {
-        logger.error("could not delete topics", err);
-    });
+(async () => {
+    try {
+        await runTeardown();
+        process.exit();
+    } catch (err) {
+        logger.error(err.message);
+        process.exit(1);
+    }
+})();
