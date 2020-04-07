@@ -2,7 +2,7 @@
 
 ## Install globally
 
-`npm install -g`
+`npm i -g asb-admin`
 
 ## Use
 
